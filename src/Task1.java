@@ -41,7 +41,7 @@ public class Task1 {
                     break;
                 else
                     System.out.println("Minimum number of numbers is 2");
-            } else if (number.matches("[\\d\\.]+"))
+            } else if (number.matches("[\\d\\.-]+"))
                     numbers.add(Double.parseDouble(number));
                 else
                     System.out.println("Unknown command or incorrect value");
@@ -51,20 +51,19 @@ public class Task1 {
 
     public static void startTask() throws InterruptedException, ExecutionException {
         countDownLatch = new CountDownLatch(listTasks.size());
-        List<Future<Double>> list = new ArrayList<>();
+        List<Future<String>> list = new ArrayList<>();
             for(var taskList : listTasks){
                 for(var action : taskList.keySet()){
-                    FutureTask<Double> future = new FutureTask<>(new CalculateTask(action, taskList.get(action)));
+                    FutureTask<String> future = new FutureTask<>(new CalculateTask(action, taskList.get(action)));
                     new Thread(future).start();
                     list.add(future);
                 }
             }
         countDownLatch.await();
-        System.out.println("------------");
         for (var l : list)
             System.out.println(l.get());
     }
-    public static class CalculateTask implements Callable<Double> {
+    public static class CalculateTask implements Callable<String> {
         String action;
         Double[] numbers;
 
@@ -74,8 +73,8 @@ public class Task1 {
         }
 
         @Override
-        public Double call() throws Exception {
-            Double number = Calculator.valueOf(action).action(numbers);
+        public String call(){
+            String number = Calculator.valueOf(action).action(numbers);
             countDownLatch.countDown();
             return number;
         }
