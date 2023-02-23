@@ -1,61 +1,6 @@
 public enum Calculator {
-    PLUS{
-        @Override
-        public String action(Double[] numbers){
-            String finalResult = numbers[0] + " + " + numbers[1];
-            double result = numbers[0] + numbers[1];
-            if(numbers.length > 2)
-                for(int i = 2; i < numbers.length; i++) {
-                    finalResult += " + " + numbers[i];
-                    result += numbers[i];
-                }
-            finalResult += " = " + result;
-            return finalResult + "\n" + "-".repeat(finalResult.length());
-        }
-    },
-    MINUS{
-        @Override
-        public String action(Double[] numbers){
-            String finalResult = numbers[0] + " - " + numbers[1];
-            double result = numbers[0] - numbers[1];
-            if(numbers.length > 2)
-                for (int i = 2; i < numbers.length; i++) {
-                    finalResult += " - " + numbers[i];
-                    result -= numbers[i];
-                }
-            finalResult += " = " + result;
-            return finalResult + "\n" + "-".repeat(finalResult.length());
-        }
-    },
-    MULTIPLY{
-        @Override
-        public String action(Double[] numbers){
-            String finalResult = numbers[0] + " * " + numbers[1];
-            double result = numbers[0] * numbers[1];
-            if (numbers.length > 2)
-                for (int i = 2; i < numbers.length; i++) {
-                    finalResult += " * " + numbers[i];
-                    result *= numbers[i];
-                }
-            finalResult += " = " + result;
-            return finalResult + "\n" + "-".repeat(finalResult.length());
-        }
-    },
-    DIVIDE{
-        @Override
-        public String action(Double[] numbers){
-            String finalResult = numbers[0] + " / " + numbers[1];
-            double result = numbers[0] / numbers[1];
-            if (numbers.length > 2)
-                for (int i = 2; i < numbers.length; i++) {
-                    finalResult += " / " + numbers[i];
-                    result /= numbers[i];
-                }
-            finalResult += " = " + result;
-            return finalResult + "\n" + "-".repeat(finalResult.length());
-        }
-    },
-    FACTORIAL{
+    PLUS(" + "), MINUS(" - "), MULTIPLY(" * "), DIVIDE(" / "),
+    FACTORIAL("! "){
         @Override
         public String action(Double[] numbers) {
             String finalResult = "";
@@ -70,5 +15,33 @@ public enum Calculator {
             return finalResult + "\n" + "-".repeat(finalResult.length());
         }
     };
-    public abstract String action(Double[] numbers);
+
+    private final String symbol;
+
+    Calculator(String symbol) {
+        this.symbol = symbol;
+    }
+
+    public String action(Double[] numbers){
+        String finalResult = numbers[0] + symbol + numbers[1];
+        double result = reg(numbers[0], numbers[1]);
+        if (numbers.length > 2)
+            for (int i = 2; i < numbers.length; i++) {
+                finalResult += symbol + numbers[i];
+                result = reg(result, numbers[i]);
+            }
+        finalResult += " = " + result;
+        return finalResult + "\n" + "-".repeat(finalResult.length());
+    }
+    
+    public double reg(Double x, Double y){
+        return switch (symbol){
+            case " + " -> x + y;
+            case " - " -> x - y;
+            case " * " -> x * y;
+            case " / " -> x / y;
+            default -> x;
+        };
+
+    }
 }

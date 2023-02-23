@@ -41,7 +41,7 @@ public class Task1 {
                     break;
                 else
                     System.out.println("Minimum number of numbers is 2");
-            } else if (number.matches("[\\d\\.-]+"))
+            } else if (number.matches("[\\d.-]+"))
                     numbers.add(Double.parseDouble(number));
                 else
                     System.out.println("Unknown command or incorrect value");
