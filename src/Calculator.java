@@ -2,12 +2,13 @@ public enum Calculator {
     PLUS{
         @Override
         public String action(Double[] numbers){
-            String finalResult = numbers[0] + " - " + numbers[1];
-            double result = 0;
-            for (double number : numbers) {
-                finalResult += " + " + number;
-                result += number;
-            }
+            String finalResult = numbers[0] + " + " + numbers[1];
+            double result = numbers[0] + numbers[1];
+            if(numbers.length > 2)
+                for(int i = 2; i < numbers.length; i++) {
+                    finalResult += " + " + numbers[i];
+                    result += numbers[i];
+                }
             finalResult += " = " + result;
             return finalResult + "\n" + "-".repeat(finalResult.length());
         }
