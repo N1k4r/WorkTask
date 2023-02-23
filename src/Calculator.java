@@ -30,7 +30,8 @@ public enum Calculator {
                 }
             return result;
         }
-    },DIVIDE{
+    },
+    DIVIDE{
         @Override
         public double action(Double[] numbers){
             double result = numbers[0] / numbers[1];

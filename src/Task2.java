@@ -36,6 +36,7 @@ public class Task2 {
             service.execute(task);
         }
         countDownLatch.await();
+        service.close();
         for(var task : tasks){
             System.out.println(task.get());
         }
