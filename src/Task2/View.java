@@ -9,9 +9,9 @@ public class View {
     Scanner scanner = new Scanner(System.in);
     public String printStartMenu(){
         System.out.println();
-        System.out.println("add - to add file");
-        System.out.println("run - to start analysis files");
-        System.out.println("exit - to terminate");
+        System.out.println("add - add file");
+        System.out.println("run - start analysis files");
+        System.out.println("exit - terminate");
         System.out.print("command - ");
         return scanner.nextLine();
     }

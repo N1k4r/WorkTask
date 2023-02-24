@@ -13,9 +13,9 @@ public class View {
     public String printStartMenu(){
         System.out.println();
         System.out.println(Arrays.toString(Calculator.values()));
-        System.out.println("add - to add calculate task");
-        System.out.println("run - to start tasks");
-        System.out.println("exit - to terminate");
+        System.out.println("add - add calculate task");
+        System.out.println("run - start tasks");
+        System.out.println("exit - terminate");
         System.out.print("command - ");
         return scanner.nextLine();
     }
